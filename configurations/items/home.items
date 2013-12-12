@@ -1,0 +1,13 @@
+Group All
+Group Level0 <groundfloor> (All)
+Group Level1 (All)
+Group Office "Büro" <office> (Level0)
+Group HWR <groundfloor> (Level0)
+Group Living "Wohnzimmer" <sofa> (Level0)
+
+Switch NAS "NAS" <network> (Office) { http="<[http://localhost/state?device=1&format=switch:2000:REGEX((.*?))] >[ON:GET:http://localhost/switch?device=1&to=on] >[OFF:GET:http://localhost/switch?device=1&to=off]" }
+String NAS_s "State [%s]" { http="<[http://localhost/state?device=1&format=string:2000:REGEX((.*?))]" }
+
+Switch Barebone "Barebone" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=3&to=on] >[OFF:GET:http://localhost/switch?device=3&to=off]" }
+
+Switch Hifi "Hifi" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=2&to=on] >[OFF:GET:http://localhost/switch?device=2&to=off]" }
