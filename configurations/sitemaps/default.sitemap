@@ -1,0 +1,39 @@
+sitemap home label="Home"
+{
+	//Frame {
+	//      Group item=Level0 label="Level 0"     
+	//}
+	Frame label="NAS" {
+              Switch item=NAS
+              Text item=NAS_s
+	}
+	Frame label="Media" {
+              Switch item=Barebone
+              Switch item=Hifi
+	}
+        Frame label="Graphen" {
+              Text label="Energie" icon="chart" {
+                   Text label="Aktuelle Werte" icon="chart"
+                   Text item=Energy_Gas
+                   Text item=Energy_HOUR_Gas
+                   Text item=Energy_DAY_Gas
+                   Text item=Energy_Current
+                   Text item=Energy_HOUR_Current
+                   Text item=Energy_DAY_Current
+                   Text label="4 Stunden" icon="chart"
+                   Chart item=Energy_Chart period=4h refresh=10000
+                   Text label="1 Tag" icon="chart"
+                   Chart item=Energy_HOUR_Chart period=D refresh=60000
+                   Text label="3 Tage" icon="chart"
+                   Chart item=Energy_HOUR_Chart period=3D refresh=60000
+                   Text label="1 Woche" icon="chart"
+                   Chart item=Energy_DAY_Chart period=W refresh=60000
+                   Text label="1 Monat" icon="chart"
+                   Chart item=Energy_DAY_Chart period=M refresh=60000
+                   //Text label="Die letzten 4 Monate" icon="chart"
+                   //Chart item=Energy_Chart period=4M refresh=600000
+                   //Text label="Letztes Jahr" icon="chart"
+                   //Chart item=Energy_Chart period=Y refresh=600000
+              }
+        }
+}
