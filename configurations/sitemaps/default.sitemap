@@ -3,23 +3,33 @@ sitemap home label="Home"
 	//Frame {
 	//      Group item=Level0 label="Level 0"     
 	//}
+        Frame label="Temperatur" {
+              Text item=Temp_Outdoor
+              Text item=Temp_Boiler
+        }
 	Frame label="NAS" {
               Switch item=NAS
-              Text item=NAS_s
+              //Text item=NAS_s
 	}
 	Frame label="Media" {
               Switch item=Barebone
               Switch item=Hifi
 	}
         Frame label="Graphen" {
+              Text label="Temperatur" icon="chart" {
+                   Text label="4 Stunden" icon="chart"
+                   Chart item=Temp_Chart period=4h refresh=10000
+                   Text label="1 Tag" icon="chart"
+                   Chart item=Temp_Chart period=D refresh=60000
+              }
               Text label="Energie" icon="chart" {
                    Text label="Aktuelle Werte" icon="chart"
                    Text item=Energy_Gas
                    Text item=Energy_HOUR_Gas
                    Text item=Energy_DAY_Gas
-                   Text item=Energy_Current
-                   Text item=Energy_HOUR_Current
-                   Text item=Energy_DAY_Current
+                   Text item=Energy_Power
+                   Text item=Energy_HOUR_Power
+                   Text item=Energy_DAY_Power
                    Text label="4 Stunden" icon="chart"
                    Chart item=Energy_Chart period=4h refresh=10000
                    Text label="1 Tag" icon="chart"

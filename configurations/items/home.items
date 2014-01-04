@@ -6,20 +6,24 @@ Group HWR <groundfloor> (Level0)
 Group Living "Wohnzimmer" <sofa> (Level0)
 
 Switch NAS "NAS" <network> (Office) { http="<[http://localhost/state?device=1&format=switch:2000:REGEX((.*?))] >[ON:GET:http://localhost/switch?device=1&to=on] >[OFF:GET:http://localhost/switch?device=1&to=off]" }
-String NAS_s "State [%s]" { http="<[http://localhost/state?device=1&format=string:2000:REGEX((.*?))]" }
+//String NAS_s "State [%s]" { http="<[http://localhost/state?device=1&format=string:2000:REGEX((.*?))]" }
 
 Switch Barebone "Barebone" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=3&to=on] >[OFF:GET:http://localhost/switch?device=3&to=off]" }
 
 Switch Hifi "Hifi" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=2&to=on] >[OFF:GET:http://localhost/switch?device=2&to=off]" }
 
 Group Energy_Chart
-Number Energy_Gas "Gas (5 min) [%f qm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
-Number Energy_Current "Strom (5 min) [%f kWh]" <none> (Energy_Chart) { http="<[http://192.168.1.201/current?unit=openhab:60000:REGEX((.*?))]" }
+Number Energy_Gas "Gas (5 min) [%.02f qm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
+Number Energy_Power "Strom (5 min) [%.02f kWh]" <none> (Energy_Chart) { http="<[http://192.168.1.201/power?unit=openhab:60000:REGEX((.*?))]" }
 
 Group Energy_HOUR_Chart
-Number Energy_HOUR_Gas "Gas (1 Stunde) [%f qm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
-Number Energy_HOUR_Current "Strom (1 Stunde) [%f kWh]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/current?unit=hour&num=1:3600000:REGEX((.*?))]" }
+Number Energy_HOUR_Gas "Gas (1 Stunde) [%.02f qm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
+Number Energy_HOUR_Power "Strom (1 Stunde) [%.02f kWh]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/power?unit=hour&num=1:3600000:REGEX((.*?))]" }
 
 Group Energy_DAY_Chart
-Number Energy_DAY_Gas "Gas (1 Tag) [%f qm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
-Number Energy_DAY_Current "Strom (1 Tag) [%f kWh]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/current?unit=yesterday:86400000:REGEX((.*?))]" }
+Number Energy_DAY_Gas "Gas (1 Tag) [%.02f qm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
+Number Energy_DAY_Power "Strom (1 Tag) [%.02f kWh]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/power?unit=yesterday:86400000:REGEX((.*?))]" }
+
+Group Temp_Chart
+Number Temp_Outdoor "Aussen [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=outdoor:300000:REGEX((.*?))]" }
+Number Temp_Boiler "Kessel [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=boiler:300000:REGEX((.*?))]" }
