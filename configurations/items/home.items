@@ -13,15 +13,15 @@ Switch Barebone "Barebone" <video> (Living) { http=">[ON:GET:http://localhost/sw
 Switch Hifi "Hifi" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=2&to=on] >[OFF:GET:http://localhost/switch?device=2&to=off]" }
 
 Group Energy_Chart
-Number Energy_Gas "Gas (5 min) [%.02f qm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
+Number Energy_Gas "Gas (5 min) [%.02f cbm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
 Number Energy_Power "Strom (5 min) [%.02f kWh]" <none> (Energy_Chart) { http="<[http://192.168.1.201/power?unit=openhab:60000:REGEX((.*?))]" }
 
 Group Energy_HOUR_Chart
-Number Energy_HOUR_Gas "Gas (1 Stunde) [%.02f qm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
+Number Energy_HOUR_Gas "Gas (1 Stunde) [%.02f cbm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
 Number Energy_HOUR_Power "Strom (1 Stunde) [%.02f kWh]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/power?unit=hour&num=1:3600000:REGEX((.*?))]" }
 
 Group Energy_DAY_Chart
-Number Energy_DAY_Gas "Gas (1 Tag) [%.02f qm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
+Number Energy_DAY_Gas "Gas (1 Tag) [%.02f cbm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
 Number Energy_DAY_Power "Strom (1 Tag) [%.02f kWh]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/power?unit=yesterday:86400000:REGEX((.*?))]" }
 
 Group Temp_Chart
