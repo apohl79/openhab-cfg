@@ -6,6 +6,10 @@ sitemap home label="Home"
         Frame label="Temperatur" {
               Text item=Temp_Outdoor
               Text item=Temp_Boiler
+              Text item=Temp_Feed
+              Text item=Temp_Buffer
+              Text item=Temp_Hottap
+              Text item=Temp_Collector
         }
 	Frame label="NAS" {
               Switch item=NAS
@@ -21,6 +25,12 @@ sitemap home label="Home"
                    Chart item=Temp_Chart period=4h refresh=10000
                    Text label="1 Tag" icon="chart"
                    Chart item=Temp_Chart period=D refresh=60000
+                   Text label="1 Woche" icon="chart"
+                   Chart item=Temp_Chart period=W refresh=60000
+                   Text label="1 Monat" icon="chart"
+                   Chart item=Temp_Chart period=M refresh=60000
+                   Text label="Die letzten 4 Monate" icon="chart"
+                   Chart item=Temp_Chart period=4M refresh=600000
               }
               Text label="Energie" icon="chart" {
                    Text label="Aktuelle Werte" icon="chart"
@@ -40,8 +50,8 @@ sitemap home label="Home"
                    Chart item=Energy_DAY_Chart period=W refresh=60000
                    Text label="1 Monat" icon="chart"
                    Chart item=Energy_DAY_Chart period=M refresh=60000
-                   //Text label="Die letzten 4 Monate" icon="chart"
-                   //Chart item=Energy_Chart period=4M refresh=600000
+                   Text label="Die letzten 4 Monate" icon="chart"
+                   Chart item=Energy_DAY_Chart period=4M refresh=600000
                    //Text label="Letztes Jahr" icon="chart"
                    //Chart item=Energy_Chart period=Y refresh=600000
               }

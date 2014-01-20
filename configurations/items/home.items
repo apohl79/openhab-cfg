@@ -27,3 +27,7 @@ Number Energy_DAY_Power "Strom (1 Tag) [%.02f kWh]" <none> (Energy_DAY_Chart) { 
 Group Temp_Chart
 Number Temp_Outdoor "Aussen [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=outdoor:300000:REGEX((.*?))]" }
 Number Temp_Boiler "Kessel [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=boiler:300000:REGEX((.*?))]" }
+Number Temp_Feed "Vorlauf [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=feed:300000:REGEX((.*?))]" }
+Number Temp_Buffer "Puffer [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=buffer:300000:REGEX((.*?))]" }
+Number Temp_Collector "Kollektor [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=collector:300000:REGEX((.*?))]" }
+Number Temp_Hottap "TW [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=hottap:300000:REGEX((.*?))]" }
