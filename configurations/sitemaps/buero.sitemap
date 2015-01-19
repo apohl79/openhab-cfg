@@ -1,0 +1,56 @@
+sitemap home label="Büro"
+{
+	Frame label="Computer" {
+              Switch item=NAS
+        }
+	Frame label="Audio" {
+              //Switch item=Sound 
+              Switch item=Mixer
+              Switch item=Speaker
+	}
+        //Frame label="Graphen" {
+        //      Text label="Temperaturen" icon="chart" {
+        //           Frame label="Aktuell" {
+        //                 Text item=Temp_Outdoor
+        //                 Text item=Temp_Boiler
+        //                 Text item=Temp_Feed
+        //                 Text item=Temp_Buffer
+        //                 Text item=Temp_Hottap
+        //                 Text item=Temp_Collector
+        //           }
+        //           //Text label="4 Stunden" icon="chart"
+        //           //Chart item=Temp_Chart period=4h refresh=10000
+        //           Text label="1 Tag" icon="chart"
+        //           Chart item=Temp_Chart period=D refresh=60000
+        //           Text label="1 Woche" icon="chart"
+        //           Chart item=Temp_Chart period=W refresh=60000
+        //           Text label="1 Monat" icon="chart"
+        //           Chart item=Temp_Chart period=M refresh=60000
+        //           Text label="Die letzten 4 Monate" icon="chart"
+        //           Chart item=Temp_Chart period=4M refresh=600000
+        //      }
+        //      Text label="Energie" icon="chart" {
+        //           Text label="Aktuell" icon="chart"
+        //           Text item=Energy_Gas
+        //           Text item=Energy_HOUR_Gas
+        //           Text item=Energy_DAY_Gas
+        //           Text item=Energy_Power
+        //           Text item=Energy_HOUR_Power
+        //           Text item=Energy_DAY_Power
+        //           //Text label="4 Stunden" icon="chart"
+        //           //Chart item=Energy_Chart period=4h refresh=10000
+        //           Text label="1 Tag" icon="chart"
+        //           Chart item=Energy_HOUR_Chart period=D refresh=60000
+        //           Text label="3 Tage" icon="chart"
+        //           Chart item=Energy_HOUR_Chart period=3D refresh=60000
+        //           Text label="1 Woche" icon="chart"
+        //           Chart item=Energy_DAY_Chart period=W refresh=60000
+        //           Text label="1 Monat" icon="chart"
+        //           Chart item=Energy_DAY_Chart period=M refresh=60000
+        //           Text label="Die letzten 4 Monate" icon="chart"
+        //           Chart item=Energy_DAY_Chart period=4M refresh=600000
+        //           //Text label="Letztes Jahr" icon="chart"
+        //           //Chart item=Energy_Chart period=Y refresh=600000
+        //      }
+        //}
+}

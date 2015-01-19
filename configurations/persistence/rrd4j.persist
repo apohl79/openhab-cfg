@@ -1,12 +1,12 @@
-Strategies {
-    // for rrd, we need a cron strategy
-    everyMinute : "0 * * * * ?"
-    //everyHour   : "0 0 * * * ?"
-    //everyDay    : "0 0 0 * * ?"
-}
-
-Items {
-      * : strategy = everyChange, restoreOnStartup
-      
-      Energy_Chart*, Energy_HOUR_Chart*, Energy_DAY_Chart*, Temp_Chart* : strategy = everyMinute
-}
+//Strategies {
+//    // for rrd, we need a cron strategy
+//    everyMinute : "0 * * * * ?"
+//    //everyHour   : "0 0 * * * ?"
+//    //everyDay    : "0 0 0 * * ?"
+//}
+//
+//Items {
+//      * : strategy = everyChange, restoreOnStartup
+//      
+//      Energy_Chart*, Energy_HOUR_Chart*, Energy_DAY_Chart*, Temp_Chart* : strategy = everyMinute
+//}

@@ -5,29 +5,55 @@ Group Office "Büro" <office> (Level0)
 Group HWR <groundfloor> (Level0)
 Group Living "Wohnzimmer" <sofa> (Level0)
 
-Switch NAS "NAS" <network> (Office) { http="<[http://localhost/state?device=1&format=switch:2000:REGEX((.*?))] >[ON:GET:http://localhost/switch?device=1&to=on] >[OFF:GET:http://localhost/switch?device=1&to=off]" }
-//String NAS_s "State [%s]" { http="<[http://localhost/state?device=1&format=string:2000:REGEX((.*?))]" }
+Switch NAS "NAS" <network> (Office) { exec=">[ON:/opt/433ctrl/scripts/carpo_on] >[OFF:/opt/433ctrl/scripts/carpo_off]" }
 
-Switch Barebone "Barebone" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=3&to=on] >[OFF:GET:http://localhost/switch?device=3&to=off]" }
+// Switch Sound triggers the Sound_Office rule
+Switch Sound "Audio Gruppe" <socket> (Office)
+Switch Mixer "Mixer" <none> (Office) { exec=">[ON:/opt/433ctrl/scripts/mixer_on] >[OFF:/opt/433ctrl/scripts/mixer_off]" }
+Switch Speaker "Boxen" <none> (Office) { exec=">[ON:/opt/433ctrl/scripts/speaker_on] >[OFF:/opt/433ctrl/scripts/speaker_off]" }
 
-Switch Hifi "Hifi" <video> (Living) { http=">[ON:GET:http://localhost/switch?device=2&to=on] >[OFF:GET:http://localhost/switch?device=2&to=off]" }
+Switch Barebone "Barebone" <video> (Living) { exec=">[ON:/opt/433ctrl/scripts/ionix_on] >[OFF:/opt/433ctrl/scripts/ionix_off]" }
+Switch Light_TV "Lampe TV" <light> (Living) { exec=">[ON:/opt/433ctrl/scripts/light_tv_on] >[OFF:/opt/433ctrl/scripts/light_tv_off]" }
 
-Group Energy_Chart
-Number Energy_Gas "Gas (5 min) [%.02f cbm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
-Number Energy_Power "Strom (5 min) [%.02f kWh]" <none> (Energy_Chart) { http="<[http://192.168.1.201/power?unit=openhab:60000:REGEX((.*?))]" }
+Switch TV "TV" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/tv_onoff]" }
 
-Group Energy_HOUR_Chart
-Number Energy_HOUR_Gas "Gas (1 Stunde) [%.02f cbm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
-Number Energy_HOUR_Power "Strom (1 Stunde) [%.02f kWh]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/power?unit=hour&num=1:3600000:REGEX((.*?))]" }
+Switch HIFI "HiFi" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_on] >[OFF:/opt/ir_wireless/scripts/hifi_off]" }
 
-Group Energy_DAY_Chart
-Number Energy_DAY_Gas "Gas (1 Tag) [%.02f cbm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
-Number Energy_DAY_Power "Strom (1 Tag) [%.02f kWh]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/power?unit=yesterday:86400000:REGEX((.*?))]" }
+// Always off
+Switch HIFI_VOL_UP "Vol Up" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_vol_up]" }
+Switch HIFI_VOL_DOWN "Vol Down" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_vol_down]" }
+Switch HIFI_MUTE "Mute" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_mute]" }
+Switch HIFI_AUX "Aux" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_aux]" }
+Switch HIFI_CD "CD" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_cd]" }
+Switch HIFI_STOP "Stop" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_stop]" }
+Switch HIFI_PLAY "Play" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_play]" }
+Switch HIFI_NEXT "Next" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_next]" }
+Switch HIFI_PREV "Prev" <video> (Living) { exec=">[ON:/opt/ir_wireless/scripts/hifi_prev]" }
+//Switch Tools_restart_wm "Restart WM" <none> { exec="<[echo OFF:5000:REGEX((.*?))] >[ON:/opt/433ctrl/scripts/comp cmd ionix service gdm restart]" }
+Switch Tools_remount "Remount NAS" <none> { exec=">[ON:/opt/433ctrl/scripts/comp ionix service autofs restart]" }
+Switch Tools_nasrestart "Restart NAS" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd carpo nas stop; nas start]" }
+Switch Tools_kill_xbmc "Restart XBMC" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd ionix killall -9 xbmc.bin]" }
+Switch Tools_reboot "Reboot" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd ionix reboot]" }
+Switch Tools_poweroff "Poweroff" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd ionix poweroff]" }
+Switch Tools_mouse "Mouse Click" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd ionix DISPLAY=:0 /home/osar/bin/mouse.py]" }
+Switch Tools_updatetv "Update TV EPG" <none> { exec=">[ON:/opt/433ctrl/scripts/comp cmd ionix su - osar -c '/home/osar/ewetv/update.sh noloop']" }
 
-Group Temp_Chart
-Number Temp_Outdoor "Aussen [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=outdoor:300000:REGEX((.*?))]" }
-Number Temp_Boiler "Kessel [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=boiler:300000:REGEX((.*?))]" }
-Number Temp_Feed "Vorlauf [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=feed:300000:REGEX((.*?))]" }
-Number Temp_Buffer "Puffer [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=buffer:300000:REGEX((.*?))]" }
-Number Temp_Collector "Kollektor [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=collector:300000:REGEX((.*?))]" }
-Number Temp_Hottap "TW [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=hottap:300000:REGEX((.*?))]" }
+//Group Energy_Chart
+//Number Energy_Gas "Gas (5 min) [%.02f cbm]" <none> (Energy_Chart) { http="<[http://192.168.1.201/gas?unit=openhab:60000:REGEX((.*?))]" }
+//Number Energy_Power "Strom (5 min) [%.02f kWh]" <none> (Energy_Chart) { http="<[http://192.168.1.201/power?unit=openhab:60000:REGEX((.*?))]" }
+
+//Group Energy_HOUR_Chart
+//Number Energy_HOUR_Gas "Gas (1 Stunde) [%.02f cbm]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/gas?unit=hour&num=1:3600000:REGEX((.*?))]" }
+//Number Energy_HOUR_Power "Strom (1 Stunde) [%.02f kWh]" <none> (Energy_HOUR_Chart) { http="<[http://192.168.1.201/power?unit=hour&num=1:3600000:REGEX((.*?))]" }
+
+//Group Energy_DAY_Chart
+//Number Energy_DAY_Gas "Gas (1 Tag) [%.02f cbm]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/gas?unit=yesterday:86400000:REGEX((.*?))]" }
+//Number Energy_DAY_Power "Strom (1 Tag) [%.02f kWh]" <none> (Energy_DAY_Chart) { http="<[http://192.168.1.201/power?unit=yesterday:86400000:REGEX((.*?))]" }
+
+//Group Temp_Chart
+//Number Temp_Outdoor "Aussen [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=outdoor:300000:REGEX((.*?))]" }
+//Number Temp_Boiler "Kessel [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=boiler:300000:REGEX((.*?))]" }
+//Number Temp_Hottap "TW [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=hottap:300000:REGEX((.*?))]" }
+//Number Temp_Buffer "Puffer [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=buffer:300000:REGEX((.*?))]" }
+//Number Temp_Collector "Kollektor [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=collector:300000:REGEX((.*?))]" }
+//Number Temp_Feed "Vorlauf [%.02f °C]" <temperature> (Temp_Chart) { http="<[http://192.168.1.201/temp?t=feed:300000:REGEX((.*?))]" }

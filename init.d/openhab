@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Start the 433ctrl service.
 #
@@ -12,25 +12,37 @@
 # Description:       openhab
 ### END INIT INFO
 
-dir=/opt/openhab
+dir=/opt/openhab-cfg
 name=openhab
 exe=$dir/start_daemon.sh
 pid=/var/run/$name.pid
 
 . /lib/lsb/init-functions
 
+function do_start() {
+    log_begin_msg "Starting $name service"
+    start-stop-daemon --start --quiet --pidfile $pid --exec $exe >/dev/null
+    log_end_msg $?
+}
+
+function do_stop() {
+    log_begin_msg "Stopping $name service"
+    start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $pid
+    log_end_msg $?
+}
+
 case "$1" in
     start)
-	log_begin_msg "Starting $name service"
-	start-stop-daemon --start --quiet --pidfile $pid --exec $exe >/dev/null
-	log_end_msg $?
+        do_start
 	;;
     stop)
-	log_begin_msg "Stopping $name service"
-	start-stop-daemon --stop --quiet --retry=TERM/30/KILL/5 --pidfile $pid
-	log_end_msg $?
+        do_stop
 	;;
+    restart)
+        do_stop
+        do_start
+        ;;
     *)
-	echo "$0 {start|stop}"
+	echo "$0 {start|stop|restart}"
 	;;
 esac

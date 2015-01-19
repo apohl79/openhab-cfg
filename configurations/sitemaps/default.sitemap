@@ -1,59 +1,42 @@
-sitemap home label="Home"
-{
-	//Frame {
-	//      Group item=Level0 label="Level 0"     
-	//}
-        Frame label="Temperatur" {
-              Text item=Temp_Outdoor
-              Text item=Temp_Boiler
-              Text item=Temp_Feed
-              Text item=Temp_Buffer
-              Text item=Temp_Hottap
-              Text item=Temp_Collector
-        }
-	Frame label="NAS" {
-              Switch item=NAS
-              //Text item=NAS_s
-	}
-	Frame label="Media" {
-              Switch item=Barebone
-              Switch item=Hifi
-	}
-        Frame label="Graphen" {
-              Text label="Temperatur" icon="chart" {
-                   Text label="4 Stunden" icon="chart"
-                   Chart item=Temp_Chart period=4h refresh=10000
-                   Text label="1 Tag" icon="chart"
-                   Chart item=Temp_Chart period=D refresh=60000
-                   Text label="1 Woche" icon="chart"
-                   Chart item=Temp_Chart period=W refresh=60000
-                   Text label="1 Monat" icon="chart"
-                   Chart item=Temp_Chart period=M refresh=60000
-                   Text label="Die letzten 4 Monate" icon="chart"
-                   Chart item=Temp_Chart period=4M refresh=600000
-              }
-              Text label="Energie" icon="chart" {
-                   Text label="Aktuelle Werte" icon="chart"
-                   Text item=Energy_Gas
-                   Text item=Energy_HOUR_Gas
-                   Text item=Energy_DAY_Gas
-                   Text item=Energy_Power
-                   Text item=Energy_HOUR_Power
-                   Text item=Energy_DAY_Power
-                   Text label="4 Stunden" icon="chart"
-                   Chart item=Energy_Chart period=4h refresh=10000
-                   Text label="1 Tag" icon="chart"
-                   Chart item=Energy_HOUR_Chart period=D refresh=60000
-                   Text label="3 Tage" icon="chart"
-                   Chart item=Energy_HOUR_Chart period=3D refresh=60000
-                   Text label="1 Woche" icon="chart"
-                   Chart item=Energy_DAY_Chart period=W refresh=60000
-                   Text label="1 Monat" icon="chart"
-                   Chart item=Energy_DAY_Chart period=M refresh=60000
-                   Text label="Die letzten 4 Monate" icon="chart"
-                   Chart item=Energy_DAY_Chart period=4M refresh=600000
-                   //Text label="Letztes Jahr" icon="chart"
-                   //Chart item=Energy_Chart period=Y refresh=600000
-              }
-        }
+sitemap home label="Wohnzimmer" {
+       Frame label="Licht" {
+             Switch item=Light_TV
+       }
+       Frame label="Bild und Ton" {
+            Switch item=TV mappings=[ON="ON/OFF"]
+            Switch item=HIFI
+            Text label="HiFi Control" icon="settings" {
+                 Frame label="Mode" {
+                       Switch item=HIFI_AUX mappings=[ON="Ok"]
+                       Switch item=HIFI_CD mappings=[ON="Ok"]
+                 }
+                 Frame label="Volume" {
+                       Switch item=HIFI_VOL_UP mappings=[ON="Ok"]
+                       Switch item=HIFI_VOL_DOWN mappings=[ON="Ok"]
+                       Switch item=HIFI_MUTE mappings=[ON="Ok"]
+                 }
+                 Frame label="CD Player" {
+                       Switch item=HIFI_PLAY mappings=[ON="Ok"]
+                       Switch item=HIFI_STOP mappings=[ON="Ok"]
+                       Switch item=HIFI_NEXT mappings=[ON="Ok"]
+                       Switch item=HIFI_PREV mappings=[ON="Ok"]
+                  }
+            }
+       }
+       Frame label="Media" {
+            Switch item=Barebone
+            Text label="Barebone Tools" icon="settings" {
+                 Frame label="Barebone" {
+                       Switch item=Tools_restart_wm mappings=[ON="Ok"]
+                       Switch item=Tools_remount mappings=[ON="Ok"]
+                       Switch item=Tools_nasrestart mappings=[ON="Ok"]
+                       Switch item=Tools_kill_xbmc mappings=[ON="Ok"]
+                       Switch item=Tools_reboot mappings=[ON="Ok"]
+                       Switch item=Tools_poweroff mappings=[ON="Ok"]
+                       Switch item=Tools_mouse mappings=[ON="Ok"]
+                       Switch item=Tools_updatetv mappings=[ON="Ok"]
+                  }
+            }
+            Switch item=NAS
+       }
 }
