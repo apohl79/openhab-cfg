@@ -1,0 +1,125 @@
+import org.openhab.core.library.types.*
+import org.openhab.model.script.actions.*
+
+/*
+ * Turn on hifi if the barebone turns on.
+ */
+rule "Barebone"
+when
+        Item Barebone received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(Hifi, ON)
+        }
+end
+
+/*
+ * Turn on/off mixer and speakers when the Sound button is pressed. Always
+ * make sure the mixer is not turned on or off while the speakers are on.
+ */
+rule "Office_Sound"
+when
+        Item Sound received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(Mixer, ON)
+           createTimer(now.plusSeconds(1)) [|
+                  sendCommand(Speaker, ON)
+           ]
+        } else {
+           sendCommand(Speaker, OFF)
+           createTimer(now.plusSeconds(1)) [|
+                  sendCommand(Mixer, OFF)
+           ]          
+        }
+end
+
+rule "HIFI_VOL_UP"
+when
+        Item HIFI_VOL_UP received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_VOL_UP, OFF)
+        }
+end
+
+rule "HIFI_VOL_DOWN"
+when
+        Item HIFI_VOL_DOWN received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_VOL_DOWN, OFF)
+        }
+end
+
+rule "HIFI_MUTE"
+when
+        Item HIFI_MUTE received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_MUTE, OFF)
+        }
+end
+
+rule "HIFI_CD"
+when
+        Item HIFI_CD received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_CD, OFF)
+        }
+end
+
+rule "HIFI_STOP"
+when
+        Item HIFI_STOP received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_STOP, OFF)
+        }
+end
+
+rule "HIFI_PLAY"
+when
+        Item HIFI_PLAY received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_PLAY, OFF)
+        }
+end
+
+rule "HIFI_NEXT"
+when
+        Item HIFI_NEXT received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_NEXT, OFF)
+        }
+end
+
+rule "HIFI_PREV"
+when
+        Item HIFI_PREV received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_PREV, OFF)
+        }
+end
+
+rule "HIFI_AUX"
+when
+        Item HIFI_AUX received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(HIFI_AUX, OFF)
+        }
+end
+
+rule "TV"
+when
+        Item TV received command
+then
+        if (receivedCommand == ON) {
+           sendCommand(TV, OFF)
+        }
+end
